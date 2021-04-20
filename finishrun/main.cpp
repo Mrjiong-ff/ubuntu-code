@@ -6,39 +6,40 @@
 int main(){
     Mat frame;
     comconfigure com;
-//    back come;
-//    finding ball;
     colorknow know;
-    int fd,result;
+    int fd,result=0;
     int nm;
     struct termios options;
     fd = open(COM_NAME, O_RDWR | O_NOCTTY |O_NDELAY);
-//    fd = open("dev/ttyUSB0", O_RDWR | O_NOCTTY |O_NDELAY);
     int q;
     char rq[512]={"0"};
-    unsigned char buff;
+    char buff;
+    char auff;
     char buffer[512];
     char len;
-//    while(read(fd,rw,10) != -1){
     memset(buffer,0,sizeof(buffer));
     com.set_opt(fd,115200,8,'N',1);
-//    while(read(fd,rq,1) > 0){
-//        ball.findball();
-    buff  = 'g ';
+    buff  = 'b';
+    auff  = 'a';
     nm = 1;
-    while (1) {
+    while (1)
+    {
     read(fd,rq,512);
     rq[0]+=96;
     rq[nm]='\0';
-//          write(fd,buff,sizeof(buffer));
-//    if(rq[0]=='b')
-    know.color();
-//    rq=rq+96;
-//    cout<<rq<<endl;
-//        nm=sizeof(fd);
-//        write(fd,&buff,1);
-//    }
-
+    if(rq[0]=='b'){
+    result=know.color();
+    }
+    if(result==1){
+        cout<<"qnmd"<<endl;
+        for (int i=0;i<1;i++) {
+            write(fd,&buff,8);
+        }
+    }
+    char(key) = (char)waitKey(1);
+    if(key == 27){
+    break;
+    }
+     }
     return 0;
-    }
-    }
+}
